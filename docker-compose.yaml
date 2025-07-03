@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  app:
+    build: .  # Constrói a imagem Docker para o serviço 'app' a partir do Dockerfile no diretório atual.
+    ports:
+      - "8000:8000"  # Mapeia a porta 8000 do contêiner para a porta 8000 na máquina host, permitindo acesso à aplicação.
+    volumes:
+      - .:/app  # Monta o diretório atual no diretório /app dentro do contêiner.  Útil para desenvolvimento, pois reflete as mudanças no código sem reconstruir a imagem.
+    environment:
+      # Define variáveis de ambiente para o contêiner 'app'.  Aqui você pode adicionar variáveis como:
+      # - CHAVE_SECRETA=algumasecreta
+      # - DEBUG=True
+      # - API_KEY=sua_chave_de_api
+      # Ajuste conforme as necessidades da sua aplicação.
+      # Remova a linha abaixo relacionada ao banco de dados, caso não esteja usando mais:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase 
+    # A remoção do serviço 'db' e do volume 'postgres_data' também retira a dependência do banco de dados.
